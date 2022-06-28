@@ -26,7 +26,7 @@
 #endif /* ARDUINO_ARCH_STM32 */
 
 /* Maximum of tracked flying objects is now SoC-specific constant */
-#define MAX_TRACKING_OBJECTS    8
+#define MAX_TRACKING_OBJECTS    24
 
 #define DEFAULT_SOFTRF_MODEL    SOFTRF_MODEL_RETRO
 
