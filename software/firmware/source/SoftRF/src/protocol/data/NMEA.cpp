@@ -19,6 +19,7 @@
 #include <TimeLib.h>
 
 #include "NMEA.h"
+#include "../../../advanced_options.h"
 #include "../../driver/GNSS.h"
 #include "../../driver/RF.h"
 #include "../../system/SoC.h"
@@ -212,6 +213,28 @@ void NMEA_fini()
 
 void NMEA_Out(uint8_t dest, byte *buf, size_t size, bool nl)
 {
+  #ifdef NMEA_UART_ENFORCED
+    if (dest != NMEA_UART){
+      if (SoC->UART_ops) {
+        SoC->UART_ops->write(buf, size);
+        if (nl)
+          SoC->UART_ops->write((byte *) "\n", 1);
+      } else {
+        SerialOutput.write(buf, size);
+        if (nl)
+          SerialOutput.write('\n');
+      }
+    }
+  #endif /* NMEA_UART_ENFORCED */
+  #ifdef NMEA_USB_ENFORCED
+    if (dest != NMEA_USB){
+      if (SoC->USB_ops) {
+        SoC->USB_ops->write(buf, size);
+        if (nl)
+          SoC->USB_ops->write((byte *) "\n", 1);
+      }
+    }
+  #endif /* NMEA_USB_ENFORCED */
   switch (dest)
   {
   case NMEA_UART:

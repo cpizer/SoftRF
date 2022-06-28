@@ -76,6 +76,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "advanced_options.h"
 #include "src/system/OTA.h"
 #include "src/system/Time.h"
 #include "src/driver/LED.h"
@@ -291,6 +292,7 @@ void loop()
       D1090_Export()
       NMEA_loop()
       ClearExpired()
+    */
     break;
   }
 
