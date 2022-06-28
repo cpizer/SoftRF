@@ -46,34 +46,34 @@ enum
 };
 
 typedef struct Settings {
-    uint8_t  mode;
-    uint8_t  rf_protocol;
-    uint8_t  band;
-    uint8_t  aircraft_type;
-    uint8_t  txpower;
-    uint8_t  volume;
+    uint8_t  mode;          //Normal; Bridge; UAV
+    uint8_t  rf_protocol;   //Legacy; OGNTP; P3I; FANET; UAT; 1090ES
+    uint8_t  band;          //AUTO; EU; RU; CN; US/CA; NZ; UK; AU; IN; KR; IL (AUTO not recommended as of 28/06/2022)
+    uint8_t  aircraft_type; //Glider; Towplane; Powered; Helicopter; UAV; Hangglider; Paraglider; Balloon; Static
+    uint8_t  txpower;       //Full; Low; Off
+    uint8_t  volume;        //Loud; Low; Off
     uint8_t  led_num;
     uint8_t  pointer;
 
-    bool     nmea_g:1;
-    bool     nmea_p:1;
-    bool     nmea_l:1;
-    bool     nmea_s:1;
+    bool     nmea_g:1;      //GNSS
+    bool     nmea_p:1;      //Private - SoftRF-specific sentences
+    bool     nmea_l:1;      //Legacy - FLARM-specific sentences
+    bool     nmea_s:1;      //Sensors
     bool     resvd1:1;
-    uint8_t  nmea_out:3;
+    uint8_t  nmea_out:3;    //Off; Serial; UDP; TCP; Bluetooth (Bluetooth only available for ESP32- and nRF52-platforms)
 
-    uint8_t  bluetooth:3; /* ESP32 built-in Bluetooth */
-    uint8_t  alarm:3;
-    bool     stealth:1;
-    bool     no_track:1;
+    uint8_t  bluetooth:3;   //Off; SPP; LE /* Only for ESP32-platform with built-in Bluetooth with SPP-Serial Port Profile and LE-Low Energy*/
+    uint8_t  alarm:3;       //None; Distance; Vector
+    bool     stealth:1;     //Stealth Mode for Legacy- and OGNTP-protocol
+    bool     no_track:1;    //No Track Mode for Legacy- and FANET-protocol
 
-    uint8_t  gdl90:3;
-    uint8_t  d1090:3;
+    uint8_t  gdl90:3;       //Off; Serial; UDP; Bluetooth
+    uint8_t  d1090:3;       //Off; Serial; Bluetooth
     uint8_t  json:2;
 
-    uint8_t  power_save;
+    uint8_t  power_save;    //Disabled; WiFi OFF; GNSS; No Receive
 
-    int8_t   freq_corr; /* +/-, kHz */
+    int8_t   freq_corr;     //Frequency Correction /* +/-, kHz */
     uint8_t  resvd2;
     uint8_t  resvd3;
     uint8_t  resvd4;

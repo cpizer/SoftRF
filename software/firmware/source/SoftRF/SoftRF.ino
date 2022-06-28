@@ -277,6 +277,20 @@ void loop()
   case SOFTRF_MODE_NORMAL:
   default:
     normal();
+    /*
+    normal(): 
+      Baro_loop()
+      GNSS_loop()
+      RF_Transmit()
+      RF_Receive()
+      ParseData()
+      Traffic_loop()
+      Sound_loop()
+      NMEA_Export()
+      GDL90_Export()
+      D1090_Export()
+      NMEA_loop()
+      ClearExpired()
     break;
   }
 
