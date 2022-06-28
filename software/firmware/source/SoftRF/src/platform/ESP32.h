@@ -30,7 +30,7 @@
 #include <SPIFFS.h>
 
 /* Maximum of tracked flying objects is now SoC-specific constant */
-#define MAX_TRACKING_OBJECTS    8
+#define MAX_TRACKING_OBJECTS    150
 
 #define DEFAULT_SOFTRF_MODEL    SOFTRF_MODEL_STANDALONE
 
