@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "../../../advanced_options.h"
 #include "TrafficHelper.h"
 #include "driver/EEPROM.h"
 #include "driver/RF.h"
@@ -168,8 +169,18 @@ void ParseData()
 
       fo.rssi = RF_last_rssi;
 
+      #ifdef FLARM_ID_IGNORED
+      /*
+      Ensure, that the original FLARM-installation is not displayed.
+      */
+      if (fo.addr == FLARM_ID_IGNORED) return;
+      #endif
+
       Traffic_Update(&fo);
 
+      /*
+      Update an element, if it already is stored in the Container
+      */
       for (i=0; i < MAX_TRACKING_OBJECTS; i++) {
         if (Container[i].addr == fo.addr) {
           uint8_t alert_bak = Container[i].alert;
@@ -182,6 +193,10 @@ void ParseData()
       int max_dist_ndx = 0;
       int min_level_ndx = 0;
 
+      /*
+      Add the target to the container or
+      replace a less relevant target by the element
+      */
       for (i=0; i < MAX_TRACKING_OBJECTS; i++) {
         if (now() - Container[i].timestamp > ENTRY_EXPIRATION_TIME) {
           Container[i] = fo;
