@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "../../../advanced_options.h"
+#include "../advanced_options.h"
 #include "TrafficHelper.h"
 #include "driver/EEPROM.h"
 #include "driver/RF.h"
